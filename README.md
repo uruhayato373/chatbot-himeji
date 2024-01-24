@@ -120,6 +120,14 @@ git clone https://github.com/dicechick373/chatbot-himeji.git
 
 VSCodeを起動して、「フォルダを開く」でフォルダを開く。
 
+## ライブラリのインストール
+
+アプリに必要なライブラリをインストールする
+
+```python
+pip install -r requirements.txt
+```
+
 
 ## 環境変数の設定
 
