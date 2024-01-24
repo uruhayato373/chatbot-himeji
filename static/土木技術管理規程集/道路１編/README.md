@@ -186,18 +186,3 @@ def format_answer(response):
 
  出典「['土木技術管理規程集_道路１編P:6-27', '土木技術管理規程集_道路１編P:6-26', '土木技術管理規程集_道路１編P:6-24', '土木技術管理規 程集_道路１編P:6-20']」
  ```
-
- ## DocumentリストをjsonLファイルに保存
-
- 複数の書籍PDFをひとつのベクトルDBに格納したい場合、PDFLoaderで変換したDocumentリストをローカルファイルに保存しておいた方が使い勝手が良い。
-
-```python
-# LangChainのDocumentクラスをjsonlファイルに保存する関数
-def save_docs_to_jsonl(array:Iterable[Document], file_path:str)->None:
-    with open(file_path, 'w') as jsonl_file:
-        for doc in array:
-            jsonl_file.write(doc.json() + '\n')
-```
-
-サンプルコードは[save_jsonl.py](/%E5%9C%9F%E6%9C%A8%E6%8A%80%E8%A1%93%E7%AE%A1%E7%90%86%E8%A6%8F%E7%A8%8B%E9%9B%86/%E9%81%93%E8%B7%AF%EF%BC%91%E7%B7%A8/save_jsonl.py)に置いておく。
-

@@ -115,7 +115,7 @@ proxy = http://m000000:password@202.221.175.116:3128
 コマンドプロンプトで下記を実行
 
 ```
-git clone /////////////////
+git clone https://github.com/dicechick373/chatbot-himeji.git
 ```
 
 VSCodeを起動して、「フォルダを開く」でフォルダを開く。
@@ -123,20 +123,24 @@ VSCodeを起動して、「フォルダを開く」でフォルダを開く。
 
 ## 環境変数の設定
 
-.envファイルに環境変数を設定
+プロジェクト直下に.streamlit/secrets.tomlを作成
 
-- OPENAI_API_KEY=
+```toml
+OPENAI_API_KEY=''
+PROXY='http://<ユーザー名>:<パスワード>@<IPアドレス>:<ポート番号>'
 
-# streamlit-app
+```
 
-The application created with stremalit is available to the public.
+## streamlitの起動
 
-stremalitで作成したアプリを公開しています。
+VSCode内のターミナルで下記を実行
 
+```bash
+streamlit run Home.py
+```
 
-# API Key
+# PDFの読込等
 
-To use LLM(ChatGPT), you need an API Key from OpenAI; please register with OpenAI and have an API Key issued. Also, you will have to pay a little money when you use the API Key.
+下記参照
 
-LLM(ChatGPT)を使用するにはOpenAIのAPI Keyが必要です。OpenAIに登録してAPI Keyの発行をしてください。また、API Keyを使用する際は少しのお金が発生します。
-
+[道路Ⅰ編](https://github.com/dicechick373/chatbot-himeji/blob/main/static/%E5%9C%9F%E6%9C%A8%E6%8A%80%E8%A1%93%E7%AE%A1%E7%90%86%E8%A6%8F%E7%A8%8B%E9%9B%86/%E9%81%93%E8%B7%AF%EF%BC%91%E7%B7%A8/README.md)
