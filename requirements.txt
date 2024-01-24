@@ -1,0 +1,9 @@
+streamlit
+streamlit-chat
+openai==0.28
+langchain
+pymupdf
+python-dotenv
+tiktoken
+faiss-cpu
+typing
