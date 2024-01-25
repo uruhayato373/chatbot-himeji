@@ -12,8 +12,8 @@ OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
 # proxy設定
 # HYOGOドメイン内で実行しない場合はコメントアウト
-os.environ["http_proxy"] = st.secrets["PROXY"]
-os.environ["https_proxy"] = st.secrets["PROXY"]
+# os.environ["http_proxy"] = st.secrets["PROXY"]
+# os.environ["https_proxy"] = st.secrets["PROXY"]
 
 # 作業ディレクトリの設定
 WORK_DIR = "static/土木技術管理規程集/道路１編"
@@ -27,6 +27,8 @@ CHUNL_OVERLAP = 100
 VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/douro1"
 
 # PDFをOCR処理してLangChainのDocumentクラスに変換する関数
+
+
 def pdf_loader(pdf_file: str):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
@@ -39,6 +41,8 @@ def pdf_loader(pdf_file: str):
     return docs
 
 # DocumentクラスのMetaDataを加工する関数
+
+
 def format_docs(org_docs, page_prefix: int):
     docs = copy.deepcopy(org_docs)
     for doc in docs:
@@ -54,12 +58,14 @@ def format_docs(org_docs, page_prefix: int):
     return docs
 
 # Documentクラスをvectorstore(FAISS)に保存する関数
+
+
 def save_local_faiss(docs):
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     db = FAISS.from_documents(docs, embeddings)
     db.save_local(VECTORSTORE_DIR)
     print(f'{len(docs)}個のドキュメントを{VECTORSTORE_DIR}に保存しました。')
-    return 
+    return
 
 
 if __name__ == "__main__":
@@ -72,19 +78,17 @@ if __name__ == "__main__":
     # 全PDFファイルを処理
     for i, file in enumerate(pdf_files):
         print(f'{file}を処理中・・・')
-        
+
         # PDFをOCR処理してDocumentクラスに格納
         docs = pdf_loader(file)
         print(docs[0])
 
-        # Documentクラスのメタデータ（出典・ページ番号）を加工        
+        # Documentクラスのメタデータ（出典・ページ番号）を加工
         format = format_docs(docs, i+1)
 
         result.extend(format)
         print(f'{len(format)}個のドキュメントを格納しました')
         print(f'ドキュメントの総数は{len(result)}個になりました。')
 
-
-        
     # ベクトルDBに保存
     save_local_faiss(result)

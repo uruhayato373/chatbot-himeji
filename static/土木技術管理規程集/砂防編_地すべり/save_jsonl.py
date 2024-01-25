@@ -14,8 +14,8 @@ OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
 # proxy設定
 # HYOGOドメイン内で実行しない場合はコメントアウト
-os.environ["http_proxy"] = st.secrets["PROXY"]
-os.environ["https_proxy"] = st.secrets["PROXY"]
+# os.environ["http_proxy"] = st.secrets["PROXY"]
+# os.environ["https_proxy"] = st.secrets["PROXY"]
 
 # 作業ディレクトリの設定
 WORK_DIR = "static/土木技術管理規程集/砂防編_地すべり"
@@ -28,6 +28,8 @@ CHUNL_OVERLAP = 100
 DOCUMENT_PATH = "documents/土木技術管理規程集/砂防編_地すべり.jsonl"
 
 # PDFをOCR処理してLangChainのDocumentクラスに変換する関数
+
+
 def pdf_loader(pdf_file: str):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
@@ -40,6 +42,8 @@ def pdf_loader(pdf_file: str):
     return docs
 
 # DocumentクラスのMetaDataを加工する関数
+
+
 def format_docs(org_docs):
     docs = copy.deepcopy(org_docs)
     for doc in docs:
@@ -55,10 +59,13 @@ def format_docs(org_docs):
     return docs
 
 # LangChainのDocumentクラスをjsonlファイルに保存する関数
-def save_docs_to_jsonl(array:Iterable[Document], file_path:str)->None:
+
+
+def save_docs_to_jsonl(array: Iterable[Document], file_path: str) -> None:
     with open(file_path, 'w') as jsonl_file:
         for doc in array:
             jsonl_file.write(doc.json() + '\n')
+
 
 if __name__ == "__main__":
     # ディレクトリ内のPDFファイルを取得
@@ -70,16 +77,15 @@ if __name__ == "__main__":
     # 全PDFファイルを処理
     for i, file in enumerate(pdf_files):
         print(f'{file}を処理中・・・')
-        
+
         # PDFをOCR処理してDocumentクラスに格納
         docs = pdf_loader(file)
 
-        # Documentクラスのメタデータ（出典・ページ番号）を加工        
+        # Documentクラスのメタデータ（出典・ページ番号）を加工
         format = format_docs(docs)
 
         result.extend(format)
         print(f'{len(format)}個のドキュメントを格納しました')
         print(f'ドキュメントの総数は{len(result)}個になりました。')
 
-    save_docs_to_jsonl(result,DOCUMENT_PATH)
-   
+    save_docs_to_jsonl(result, DOCUMENT_PATH)
