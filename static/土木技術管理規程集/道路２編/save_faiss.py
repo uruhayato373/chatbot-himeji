@@ -20,7 +20,7 @@ WORK_DIR = "static/土木技術管理規程集/道路２編"
 
 # チャンクサイズとオーバーラップの設定
 CHUNK_SIZE = 1000
-CHUNL_OVERLAP = 100
+CHUNK_OVERLAP = 100
 
 # vectorstoreを保存するディレクトリの設定
 # 日本語のディレクトリ名はエラーになる
@@ -32,7 +32,7 @@ VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/douro2"
 def pdf_loader(pdf_file: str):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNL_OVERLAP,
+        chunk_overlap=CHUNK_OVERLAP,
     )
 
     loader = PyMuPDFLoader(pdf_file)

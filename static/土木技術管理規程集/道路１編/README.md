@@ -14,7 +14,7 @@ LangChainの[Document Loaders](https://python.langchain.com/docs/modules/data_co
 ```python
 # チャンクサイズとオーバーラップの設定
 CHUNK_SIZE = 1000
-CHUNL_OVERLAP = 100
+CHUNK_OVERLAP = 100
 ```
 
 参考サイト
@@ -34,7 +34,7 @@ PyPDFでExtracting imageを利用すればもっと精度は上がるかもし�
 def pdf_loader(pdf_file: str):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNL_OVERLAP,
+        chunk_overlap=CHUNK_OVERLAP,
     )
 
     loader = PyMuPDFLoader(pdf_file)

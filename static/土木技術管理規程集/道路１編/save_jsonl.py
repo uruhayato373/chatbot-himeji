@@ -22,7 +22,7 @@ WORK_DIR = "static/土木技術管理規程集/道路１編"
 
 # チャンクサイズとオーバーラップの設定
 CHUNK_SIZE = 1000
-CHUNL_OVERLAP = 100
+CHUNK_OVERLAP = 100
 
 # LangChainのDocumentクラスを保存するファイル名の設定
 DOCUMENT_PATH = "documents/土木技術管理規程集/道路１編.jsonl"
@@ -33,7 +33,7 @@ DOCUMENT_PATH = "documents/土木技術管理規程集/道路１編.jsonl"
 def pdf_loader(pdf_file: str):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNL_OVERLAP,
+        chunk_overlap=CHUNK_OVERLAP,
     )
 
     loader = PyMuPDFLoader(pdf_file)
