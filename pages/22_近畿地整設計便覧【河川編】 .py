@@ -19,11 +19,11 @@ st.header("LangChain🦜🔗 himeji-model")
 with st.sidebar:
 
     st.subheader('Link')
-    "[第1章_道路一般](https://works-documentation.vercel.app/01_%E5%9C%9F%E6%9C%A8%E5%85%B1%E9%80%9A/02_%E8%AA%BF%E6%9F%BB%E3%83%BB%E8%A8%88%E7%94%BB%E3%83%BB%E8%A8%AD%E8%A8%88/01_%E5%9C%9F%E6%9C%A8%E6%8A%80%E8%A1%93%E7%AE%A1%E7%90%86%E8%A6%8F%E5%AE%9A%E9%9B%86/01_%E9%81%93%E8%B7%AF%E2%85%A0%E7%B7%A8/01_%E7%AC%AC%EF%BC%91%E7%AB%A0_%E9%81%93%E8%B7%AF%E4%B8%80%E8%88%AC/%E7%AC%AC%EF%BC%91%E7%AB%A0_%E9%81%93%E8%B7%AF%E4%B8%80%E8%88%AC.pdf)"
+    "[Source Code](https://github.com/dicechick373/chatbot-himeji)"
     "[OpenAI API](https://platform.openai.com)"
 
 # ベクトルDBの指定
-VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/douro1"
+VECTORSTORE_DIR = "vectorstore/faiss/chiseibinran/kasen"
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
