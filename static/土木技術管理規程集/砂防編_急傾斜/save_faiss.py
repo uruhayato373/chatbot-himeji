@@ -17,7 +17,7 @@ OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 # os.environ["https_proxy"] = st.secrets["PROXY"]
 
 # 作業ディレクトリの設定
-WORK_DIR = "static/土木技術管理規程集/河川編"
+WORK_DIR = "static/土木技術管理規程集/砂防編_急傾斜"
 
 # チャンクサイズとオーバーラップの設定
 CHUNK_SIZE = 1000
@@ -25,7 +25,7 @@ CHUNK_OVERLAP = 100
 
 # vectorstoreを保存するディレクトリの設定
 # 日本語のディレクトリ名はエラーになる
-VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/kasen"
+VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/kyuukeisya"
 
 
 def pdf_loader(pdf_file: str) -> Iterable[Document]:
@@ -42,18 +42,19 @@ def pdf_loader(pdf_file: str) -> Iterable[Document]:
     return docs
 
 
-def format_metadata(org_docs: Iterable[Document], page_prefix: int) -> Iterable[Document]:
+def format_metadata(org_docs: Iterable[Document]) -> Iterable[Document]:
     '''DocumentのmetaDataを加工する関数'''
 
     docs = copy.deepcopy(org_docs)
     for doc in docs:
-        # sourceを「土木技術管理規程集_河川編」のフォーマットに修正
+        # sourceを修正
         source = doc.metadata["source"].split("/")
-        new_source = source[1] + "_" + source[2].split("\\")[0]
+        new_source = source[1] + "_" + source[2].split(
+            "_")[0] + "_" + source[2].split("_")[1].split("\\")[0]
         doc.metadata.update({"source": new_source})
 
-        # ページ番号を「1-1」のフォーマットに修正
-        new_page = f'{str(page_prefix)}-{str(doc.metadata["page"]+1)}'
+        # ページ番号を修正
+        new_page = f'{str(doc.metadata["page"]+1)}'
         doc.metadata.update({"page": new_page})
 
     return docs
@@ -81,11 +82,11 @@ if __name__ == "__main__":
 
         page_prefix = file.split("_")[1].replace(".pdf", "")
 
-        # PDFをOCR処理してDocumentクラスに格納
+        # PDFをOCR処理してDocumentに格納
         docs = pdf_loader(file)
 
-        # Documentクラスのメタデータ（出典・ページ番号）を加工
-        formatted_docs = format_metadata(docs, i+1)
+        # メタデータ（出典・ページ番号）を加工
+        formatted_docs = format_metadata(docs)
         print(formatted_docs[0])
 
         result.extend(formatted_docs)

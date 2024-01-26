@@ -49,7 +49,8 @@ def format_metadata(org_docs: Iterable[Document]) -> Iterable[Document]:
     for doc in docs:
         # sourceを修正
         source = doc.metadata["source"].split("/")
-        new_source = source[1] + "_" + source[2].split("\\")[0]
+        new_source = source[1] + "_" + source[2].split(
+            "_")[0] + "_" + source[2].split("_")[1].split("\\")[0]
         doc.metadata.update({"source": new_source})
 
         # ページ番号を修正
