@@ -23,7 +23,7 @@ with st.sidebar:
     "[OpenAI API](https://platform.openai.com)"
 
 # ベクトルDBの指定
-VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/douro2"
+VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/kasen"
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
