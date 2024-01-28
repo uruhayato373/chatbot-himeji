@@ -53,7 +53,8 @@ def format_metadata(docs: Iterable[Document], page_prefix: int)-> Iterable[Docum
     return docs
 
 
-def save_local_faiss(docs):
+def save_local_faiss(docs: Iterable[Document]):
+    '''DocumentをFAISSに保存する関数'''
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     db = FAISS.from_documents(docs, embeddings)
     db.save_local(VECTORSTORE_DIR)
