@@ -1,7 +1,7 @@
 import openai
 import streamlit as st
 import os
-# import glob
+from typing import Any, Dict, List
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
@@ -20,7 +20,7 @@ OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 # os.environ["https_proxy"] = st.secrets["PROXY"]
 
 
-def run_llm(query, vectordir):
+def run_llm(query, vectordir, chat_history: List[Dict[str, Any]] = []):
 
     # set embeddings
     embeddings = OpenAIEmbeddings(
@@ -42,7 +42,7 @@ def run_llm(query, vectordir):
         llm=chat, retriever=vectorstore.as_retriever(),
         return_source_documents=True)
 
-    response = chain({"question": query, "chat_history": []})
+    response = chain({"question": query, "chat_history": chat_history})
 
     return {"question": response["question"], "answer": format_answer(response)}
 
@@ -56,4 +56,4 @@ def format_answer(response):
         page = r.metadata["page"]
         sources.append(source + 'P:' + page)
 
-    return f"{response['answer']} \n\n 出典「{sources}」"
+    return f"{response['answer']} \n\n 出典:{sources}"
