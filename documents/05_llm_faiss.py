@@ -1,6 +1,8 @@
 import streamlit as st
 from langchain_community.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
+from langchain.chat_models import ChatOpenAI
+from langchain.chains import ConversationalRetrievalChain
 
 # proxy設定
 # HYOGOドメイン内で実行しない場合はコメントアウト
@@ -26,15 +28,34 @@ def load_faiss():
     return vectorstore
 
 
+def run_llm(query):
+    '''ベクトルDBの検索結果を踏まえて回答する関数'''
+
+    vectorstore = load_faiss()
+
+    # set chat-model
+    chat = ChatOpenAI(
+        openai_api_key=OPENAI_API_KEY,
+        verbose=True,
+        temperature=0,
+        model_name="gpt-3.5-turbo-0613"
+    )
+
+    # set chain
+    chain = ConversationalRetrievalChain.from_llm(
+        llm=chat,
+        retriever=vectorstore.as_retriever(),
+        return_source_documents=True)
+
+    return chain({"question": query, "chat_history": []})
+
+
 if __name__ == "__main__":
 
     db = load_faiss()
 
     query = '道路の横断勾配は？'
 
-    docs_and_scores = db.similarity_search_with_score(query)
-
-    for doc in docs_and_scores:
-        print("source:", doc[0].metadata["source"])
-        print("page:", doc[0].metadata["page"])
-        print("スコア:", doc[1])
+    results = run_llm(query)
+    print("質問：", results["question"])
+    print("回答：", results["answer"])
