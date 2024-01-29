@@ -30,6 +30,9 @@ if "messages" not in st.session_state:
     st.session_state["messages"] = [
         {"role": "assistant", "content": "質問を入力してください"}]
 
+if "chat_history" not in st.session_state:
+    st.session_state["chat_history"] = []
+
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
@@ -38,8 +41,11 @@ if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
     response = run_llm(
-        query=prompt, vectordir=VECTORSTORE_DIR
+        query=prompt,
+        vectordir=VECTORSTORE_DIR,
+        chat_history=st.session_state["chat_history"]
     )
     msg = response['answer']
     st.session_state.messages.append({"role": "assistant", "content": msg})
+    st.session_state.chat_history.append((prompt, response["answer"]))
     st.chat_message("assistant").write(msg)
