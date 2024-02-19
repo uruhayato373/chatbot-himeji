@@ -19,7 +19,6 @@ st.header("LangChain🦜🔗 himeji-model")
 with st.sidebar:
 
     st.subheader('Link')
-    "[Source Code](https://github.com/dicechick373/chatbot-himeji)"
     "[OpenAI API](https://platform.openai.com)"
     
 # ベクトルDBの指定

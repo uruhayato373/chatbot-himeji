@@ -17,7 +17,6 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 with st.sidebar:
 
     st.subheader('Link')
-    "[Source Code](https://github.com/dicechick373/chatbot-himeji)"
     "[OpenAI API](https://platform.openai.com)"
 
 # header
