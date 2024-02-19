@@ -41,10 +41,8 @@ def vectorstore_dir(stock):
     elif stock == '河川管理施設等構造令':
         return "vectorstore/faiss/kasen_kouzourei"
 
-
 # header
 st.header("LangChain🦜🔗 himeji-model")
-
 
 # sidebar
 with st.sidebar:
