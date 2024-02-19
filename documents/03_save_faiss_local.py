@@ -5,14 +5,15 @@ from langchain.schema import Document
 from typing import Iterable
 from langchain_community.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
+import os
 
 # openAIのAPIキーを設定
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
 # proxy設定
 # HYOGOドメイン内で実行しない場合はコメントアウト
-# os.environ["http_proxy"] = st.secrets["PROXY"]
-# os.environ["https_proxy"] = st.secrets["PROXY"]
+os.environ["http_proxy"] = st.secrets["PROXY"]
+os.environ["https_proxy"] = st.secrets["PROXY"]
 
 # 作業ディレクトリの設定
 WORK_DIR = "static/土木技術管理規程集/道路１編"

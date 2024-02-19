@@ -3,11 +3,12 @@ from langchain_community.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
+import os
 
 # proxy設定
 # HYOGOドメイン内で実行しない場合はコメントアウト
-# os.environ["http_proxy"] = st.secrets["PROXY"]
-# os.environ["https_proxy"] = st.secrets["PROXY"]
+os.environ["http_proxy"] = st.secrets["PROXY"]
+os.environ["https_proxy"] = st.secrets["PROXY"]
 
 # openAIのAPIキーを設定
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
