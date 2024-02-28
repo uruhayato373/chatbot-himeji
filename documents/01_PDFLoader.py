@@ -34,19 +34,6 @@ def pdf_loader(pdf_file: str) -> Iterable[Document]:
 
     return docs
 
-def pdf_loader(pdf_file: str):
-    '''PDFをLangChainのDocumentに変換する関数'''
-
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNK_OVERLAP,
-    )
-
-    loader = PyMuPDFLoader(pdf_file)
-    docs = loader.load_and_split(text_splitter)
-
-    return docs
-
 
 if __name__ == "__main__":
 

@@ -10,8 +10,8 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # proxy設定
 # デプロイ時はコメントアウト
-# os.environ["http_proxy"] = st.secrets["PROXY"]
-# os.environ["https_proxy"] = st.secrets["PROXY"]
+os.environ["http_proxy"] = st.secrets["PROXY"]
+os.environ["https_proxy"] = st.secrets["PROXY"]
 
 def vectorstore_dir(stock):
     if stock == '土木工事共通仕様書':
@@ -40,6 +40,8 @@ def vectorstore_dir(stock):
         return "vectorstore/faiss/douro_kouzourei"
     elif stock == '河川管理施設等構造令':
         return "vectorstore/faiss/kasen_kouzourei"
+    elif stock == '河川管理事務必携':
+        return "vectorstore/faiss/kasen_hikkei"
 
 # header
 st.header("LangChain🦜🔗 himeji-model")
@@ -52,7 +54,7 @@ with st.sidebar:
         options=('土木工事共通仕様書', '土木請負工事必携', '規程集【道路Ⅰ編】',
                  '規程集【道路Ⅱ編】', '規程集【河川編】','規程集【砂防編_砂防】',
                  '規程集【砂防編_急傾斜】', '規程集【砂防編_地すべり】',
-                 '地整便覧【土木工事共通編】', '地整便覧【道路編】', '地整便覧【河川編】'),
+                 '地整便覧【土木工事共通編】', '地整便覧【道路編】', '地整便覧【河川編】','河川管理事務必携'),
         index=0,
         # horizontal=True,
         )
