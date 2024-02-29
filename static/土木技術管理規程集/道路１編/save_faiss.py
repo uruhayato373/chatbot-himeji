@@ -28,10 +28,8 @@ CHUNK_OVERLAP = 100
 # 日本語のディレクトリ名はエラーになる
 VECTORSTORE_DIR = "vectorstore/faiss/kiteisyuu/douro1"
 
-# PDFをOCR処理してLangChainのDocumentクラスに変換する関数
-
-
 def pdf_loader(pdf_file: str):
+    '''PDFをLangChainのDocumentに変換する関数'''
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
         chunk_overlap=CHUNK_OVERLAP,
@@ -42,10 +40,8 @@ def pdf_loader(pdf_file: str):
 
     return docs
 
-# DocumentクラスのMetaDataを加工する関数
-
-
 def format_docs(org_docs, page_prefix: int):
+    '''Documentのmetadataを加工する関数'''
     docs = copy.deepcopy(org_docs)
     for doc in docs:
         # sourceを「土木技術管理規程集_道路１編」のフォーマットに修正
@@ -59,18 +55,11 @@ def format_docs(org_docs, page_prefix: int):
 
     return docs
 
-# Documentクラスをvectorstore(FAISS)に保存する関数
-
-
 def save_local_faiss(docs):
+    '''DocumentをFAISSに保存する関数'''
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     db = FAISS.from_documents(docs, embeddings)
     db.save_local(VECTORSTORE_DIR)
-
-    index_name = 'name-database' # Index の名前
-    pinecone.init(api_key='4179d565-715b-44e0-8f54-73de781f272a', environment='gcp-starter')
-    index = pinecone.Index(index_name)
-    vectorstore = Pinecone.from_documents(docs, embeddings, index_name=index_name)
     print(f'{len(docs)}個のドキュメントを{VECTORSTORE_DIR}に保存しました。')
     return
 
