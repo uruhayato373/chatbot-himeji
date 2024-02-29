@@ -31,7 +31,6 @@ def load_faiss():
 
 def run_llm(query):
     '''ベクトルDBの検索結果を踏まえて回答する関数'''
-
     vectorstore = load_faiss()
 
     # set chat-model
@@ -55,7 +54,7 @@ if __name__ == "__main__":
 
     db = load_faiss()
 
-    query = '道路の横断勾配は？'
+    query = 'アスファルト舗装の最小厚さは？'
 
     results = run_llm(query)
     print("質問：", results["question"])

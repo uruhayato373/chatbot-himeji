@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     db = load_faiss()
 
-    query = '道路の横断勾配は？'
+    query = 'アスファルト舗装の最小厚さは？'
 
     docs_and_scores = db.similarity_search_with_score(query)
 
