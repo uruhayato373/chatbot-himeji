@@ -6,16 +6,12 @@ from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Pinecone
-import json
-import pinecone
+from ....config import *  # noqa: F403
+
+
 # openAIのAPIキーを設定
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
-# proxy設定
-# HYOGOドメイン内で実行しない場合はコメントアウト
-os.environ["http_proxy"] = st.secrets["PROXY"]
-os.environ["https_proxy"] = st.secrets["PROXY"]
 
 # 作業ディレクトリの設定
 WORK_DIR = "static/土木技術管理規程集/道路１編"
