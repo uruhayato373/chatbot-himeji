@@ -5,16 +5,24 @@ import copy
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_community.embeddings import OpenAIEmbeddings
+import certifi
 
-import sys
+os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from .config import *  # noqa: F403
+# プロキシ設定
+proxy = st.secrets["PROXY"]
 
+if proxy is not None:
+    os.environ["http_proxy"] = st.secrets["PROXY"]
+    os.environ["https_proxy"] = st.secrets["PROXY"]
+
+print(os.environ["http_proxy"])
 
 # openAIのAPIキーを設定
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+
+print(OPENAI_API_KEY)
 
 
 # 作業ディレクトリの設定
@@ -60,7 +68,7 @@ def format_docs(org_docs, page_prefix: int):
 
 def save_local_faiss(docs):
     """DocumentをFAISSに保存する関数"""
-    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY, verify=False)
     db = FAISS.from_documents(docs, embeddings)
     db.save_local(VECTORSTORE_DIR)
     print(f"{len(docs)}個のドキュメントを{VECTORSTORE_DIR}に保存しました。")
