@@ -14,15 +14,17 @@ def run_llm(query, vectordir, chat_history: List[Dict[str, Any]] = []):
     # set embeddings
     embeddings = OpenAIEmbeddings(openai_api_key=openai.api_key)
 
-    # load vectorstore
-    vectorstore = FAISS.load_local(vectordir, embeddings)
+    # load vectorstore with allow_dangerous_deserialization
+    vectorstore = FAISS.load_local(
+        vectordir, embeddings, allow_dangerous_deserialization=True
+    )
 
     # set chat-model
     chat = ChatOpenAI(
         openai_api_key=OPENAI_API_KEY,
         verbose=True,
         temperature=0,
-        model_name="gpt-3.5-turbo-0613",
+        model_name="gpt-3.5-turbo",
     )
 
     # set chain
@@ -33,8 +35,6 @@ def run_llm(query, vectordir, chat_history: List[Dict[str, Any]] = []):
     response = chain({"question": query, "chat_history": chat_history})
 
     return {"question": response["question"], "answer": format_answer(response)}
-
-    # return chain({"question": query, "chat_history": []})
 
 
 def format_answer(response):

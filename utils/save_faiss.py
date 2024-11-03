@@ -1,4 +1,3 @@
-import os
 import glob
 import streamlit as st
 import copy
@@ -6,18 +5,7 @@ from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import OpenAIEmbeddings
-import certifi
 
-os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
-
-# プロキシ設定
-proxy = st.secrets["PROXY"]
-
-if proxy is not None:
-    os.environ["http_proxy"] = st.secrets["PROXY"]
-    os.environ["https_proxy"] = st.secrets["PROXY"]
-
-print(os.environ["http_proxy"])
 
 # openAIのAPIキーを設定
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
