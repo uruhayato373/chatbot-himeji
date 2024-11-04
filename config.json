@@ -1,0 +1,34 @@
+{
+  "stock_dir_map": {
+    "土木工事共通仕様書": "vectorstore/faiss/kyoutsuu_shiyousyo",
+    "土木請負工事必携": "vectorstore/faiss/hikkei",
+    "規程集【道路Ⅰ編】": "vectorstore/faiss/kiteisyuu/douro1",
+    "規程集【道路Ⅱ編】": "vectorstore/faiss/kiteisyuu/douro2",
+    "規程集【河川編】": "vectorstore/faiss/kiteisyuu/kasen",
+    "規程集【砂防編_砂防】": "vectorstore/faiss/kiteisyuu/sabou",
+    "規程集【砂防編_急傾斜】": "vectorstore/faiss/kiteisyuu/kyuukeisya",
+    "規程集【砂防編_地すべり】": "vectorstore/faiss/kiteisyuu/jisuberi",
+    "地整便覧【土木工事共通編】": "vectorstore/faiss/chiseibinran/kyoutsuu",
+    "地整便覧【道路編】": "vectorstore/faiss/chiseibinran/douro",
+    "地整便覧【河川編】": "vectorstore/faiss/chiseibinran/kasen",
+    "道路構造令": "vectorstore/faiss/douro_kouzourei",
+    "河川管理施設等構造令": "vectorstore/faiss/kasen_kouzourei",
+    "河川管理事務必携": "vectorstore/faiss/kasen_hikkei"
+  },
+  "stock_options": [
+    "土木工事共通仕様書",
+    "土木請負工事必携",
+    "規程集【道路Ⅰ編】",
+    "規程集【道路Ⅱ編】",
+    "規程集【河川編】",
+    "規程集【砂防編_砂防】",
+    "規程集【砂防編_急傾斜】",
+    "規程集【砂防編_地すべり】",
+    "地整便覧【土木工事共通編】",
+    "地整便覧【道路編】",
+    "地整便覧【河川編】",
+    "道路構造令",
+    "河川管理事務必携",
+    "河川管理施設等構造令"
+  ]
+}

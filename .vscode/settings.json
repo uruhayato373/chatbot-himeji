@@ -1,22 +1,23 @@
 {
-    "cSpell.words": [
-        "chiseibinran",
-        "faiss",
-        "hikkei",
-        "HYOGO",
-        "jisuberi",
-        "kasen",
-        "kiteisyuu",
-        "kouzourei",
-        "kyoutsuu",
-        "kyuukeisya",
-        "langchain",
-        "OPENAI",
-        "sabou",
-        "shiyousyo",
-        "streamlit",
-        "vectordir",
-        "VECTORSTORE",
-        "vectorstores"
-    ]
+  "cSpell.words": [
+    "chiseibinran",
+    "doboku",
+    "faiss",
+    "hikkei",
+    "HYOGO",
+    "jisuberi",
+    "kasen",
+    "kiteisyuu",
+    "kouzourei",
+    "kyoutsuu",
+    "kyuukeisya",
+    "langchain",
+    "OPENAI",
+    "sabou",
+    "shiyousyo",
+    "streamlit",
+    "vectordir",
+    "VECTORSTORE",
+    "vectorstores"
+  ]
 }
